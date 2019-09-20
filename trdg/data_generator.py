@@ -46,6 +46,7 @@ class FakeTextDataGenerator(object):
         fit,
         grayscale=False,
         images="",
+        space_range=False,
     ):
         image = None
 
@@ -61,6 +62,9 @@ class FakeTextDataGenerator(object):
                 raise ValueError("Vertical handwritten text is unavailable")
             image = handwritten_text_generator.generate(text, text_color)
         else:
+            if space_range:
+                space_width = rnd.uniform(1.0, space_width)
+
             image = computer_text_generator.generate(
                 text, font, text_color, size, orientation, space_width, fit
             )

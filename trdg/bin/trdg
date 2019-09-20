@@ -250,6 +250,12 @@ def parse_arguments():
         default=1.0,
     )
     parser.add_argument(
+        "--space_range",
+        action="store_true",
+        help="If true the space width will be randomly takge from interval <1.0, space_width>",
+        default=False,
+    ),
+    parser.add_argument(
         "-m",
         "--margins",
         type=margins,
@@ -410,7 +416,8 @@ def main():
                 [args.margins] * string_count,
                 [args.fit] * string_count,
                 [args.grayscale] * string_count,
-                [args.images] * string_count
+                [args.images] * string_count,
+                [args.space_range] * string_count
             )
     ), total=args.count):
         pass

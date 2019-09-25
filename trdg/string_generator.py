@@ -27,12 +27,13 @@ def create_strings_from_file(filename, count):
     return strings
 
 
-def create_strings_from_regex(length, regex, count):
-    x = Xeger(limit=length)
+def create_strings_from_regex(max_length, regex, count):
+    x = Xeger(limit=max_length)
     strings = []
 
     for _ in range(0, count):
         current_string = x.xeger(regex)
+        current_string = current_string[0:max_length]
         strings.append(current_string)
     return strings
 

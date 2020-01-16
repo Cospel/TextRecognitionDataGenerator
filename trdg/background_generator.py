@@ -55,7 +55,7 @@ def quasicrystal(height, width):
     return image.convert("RGBA")
 
 
-def picture(height, width, image_dir):
+def picture(height, width, image_dir, images_fit):
     """
         Create a background with a picture
     """
@@ -66,6 +66,10 @@ def picture(height, width, image_dir):
         picture_name = pictures[rnd.randrange(0, len(pictures))]
 
         pic = Image.open(os.path.join(image_dir, picture_name))
+
+        if images_fit:
+            pic = pic.resize([width, height])
+            return pic
 
         if pic.size[0] < width:
             pic = pic.resize(

@@ -47,10 +47,16 @@ class FakeTextDataGenerator(object):
         grayscale=False,
         images="",
         space_range=False,
+        images_fit=True,
+        random_margins=False,
+        random_opacity=False,
+        random_character_spacing=False
     ):
         image = None
 
         margin_top, margin_left, margin_bottom, margin_right = margins
+        if random_margins:
+            margin_top, margin_left, margin_bottom, margin_right = rnd.randint(0, margins[0]), rnd.randint(0, margins[1]), rnd.randint(0, margins[2]), rnd.randint(0, margins[3])
         horizontal_margin = margin_left + margin_right
         vertical_margin = margin_top + margin_bottom
 
@@ -66,7 +72,7 @@ class FakeTextDataGenerator(object):
                 space_width = rnd.uniform(1.0, space_width)
 
             image = computer_text_generator.generate(
-                text, font, text_color, size, orientation, space_width, fit
+                text, font, text_color, size, orientation, space_width, fit, random_opacity, random_character_spacing
             )
 
         random_angle = rnd.randint(0 - skewing_angle, skewing_angle)
@@ -145,7 +151,7 @@ class FakeTextDataGenerator(object):
             )
         else:
             background = background_generator.picture(
-                background_height, background_width, images
+                background_height, background_width, images, images_fit
             )
 
         #############################
